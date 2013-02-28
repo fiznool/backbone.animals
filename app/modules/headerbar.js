@@ -3,14 +3,11 @@ define([
     ],
     function(Backbone) {
 
-        var Detail = {};
+        var Headerbar = {};
 
-        Detail.Model = Backbone.Model.extend({
+        Headerbar.Model = Backbone.Model.extend({
             defaults: {
-                id: null,
-                name: '',
-                description: '',
-                img: ''
+                title: ''
             },
 
             url: function() {
@@ -18,13 +15,11 @@ define([
             }
         });
 
-        Detail.View = Backbone.View.extend({
-            className: 'detail',
-
-            template: _.template('<img src="<%- img %>" height="177px"><p><%- description %></p>'),
+        Headerbar.View = Backbone.View.extend({
+            template: _.template('<h1 class="headerbar-title"><%- title %></h1>'),
 
             initialize: function() {
-                this.model = this.model || new Detail.Model();
+                this.model = this.model || new Headerbar.Model();
                 this.startListening();
             },
 
@@ -43,5 +38,5 @@ define([
             }
         });
 
-        return Detail;
+        return Headerbar;
 });

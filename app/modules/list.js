@@ -55,6 +55,10 @@ define([
                 var itemView = new List.ItemView({ model: item });
                 itemView.render();
                 this.$el.append(itemView.el);
+            },
+
+            title: function() {
+                return 'Mysterious Animals';
             }
 
         });

@@ -15,7 +15,10 @@ require([
             $('#app').tappivate();
 
             // Start the app
-            var router = new Router({ el: '#main' });
+            var router = new Router({
+                header: '#headerbar',
+                main: '#main'
+            });
             Backbone.history.start({ pushState: false });
         });
 

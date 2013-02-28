@@ -1,8 +1,9 @@
 define([
     'backbone',
+    'modules/headerbar',
     'modules/list',
     'modules/detail'
-], function(Backbone, List, Detail) {
+], function(Backbone, Headerbar, List, Detail) {
 
         var Router = Backbone.Router.extend({
             routes: {
@@ -12,7 +13,8 @@ define([
             },
 
             initialize: function(options) {
-                this.$el = $(options.el);
+                this.$el = $(options.main);
+                this.headerbar = new Headerbar.View({ el: options.header });
                 this.currentView = new Backbone.View();
             },
 
@@ -24,6 +26,7 @@ define([
 
                 this.currentView.on('render', function(view) {
                     this.$el.html(view.el);
+                    this.headerbar.model.set({ title: view.title() });
                 }, this);
             },
 
