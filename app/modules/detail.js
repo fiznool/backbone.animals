@@ -23,8 +23,8 @@ define([
 
             template: _.template('<img src="<%- img %>" height="177px"><p><%- description %></p>'),
 
-            initialize: function() {
-                this.model = this.model || new Detail.Model();
+            initialize: function(options) {
+                this.data = this.model = this.model || new Detail.Model({ id: options.id });
                 this.startListening();
             },
 

@@ -1,51 +1,38 @@
 define([
     'backbone',
+    'viewmanager',
     'modules/headerbar',
     'modules/list',
     'modules/detail'
-], function(Backbone, Headerbar, List, Detail) {
+], function(Backbone, ViewManager, Headerbar, List, Detail) {
 
-        var Router = Backbone.Router.extend({
-            routes: {
-                '!/animals': 'listView',
-                '!/animals/:id': 'detailView',
-                '': 'listView'
-            },
+    var Router = Backbone.Router.extend({
+        routes: {
+            '!/animals': 'listView',
+            '!/animals/:id': 'detailView',
+            '': 'listView'
+        },
 
-            initialize: function(options) {
-                this.$el = $(options.main);
-                this.headerbar = new Headerbar.View({ el: options.header });
-                this.currentView = new Backbone.View();
-            },
+        initialize: function(options) {
+            this.viewManager = new ViewManager(options.main);
+            this.headerbar = new Headerbar.View({ el: options.header });
+        },
 
-            changeView: function(newView) {
-                this.currentView.stopListening();
-                this.currentView.off('render');
+        _changeView: function(newView) {
+            var self = this;
+            this.viewManager.changeView(newView, function() {
+                self.headerbar.model.set({ title: newView.title() });
+            });
+        },
 
-                this.currentView = newView;
+        listView: function() {
+            this._changeView(new List.View());
+        },
 
-                this.currentView.on('render', function(view) {
-                    this.$el.html(view.el);
-                    this.headerbar.model.set({ title: view.title() });
-                }, this);
-            },
+        detailView: function(id) {
+            this._changeView(new Detail.View({ id: id }));
+        }
+    });
 
-            listView: function() {
-                var listData = new List.Collection();
-                var listView = new List.View({ collection: listData });
-
-                this.changeView(listView);
-                listData.fetch();
-            },
-
-            detailView: function(id) {
-                var detailData = new Detail.Model({ id: id });
-                var detailView = new Detail.View({ model: detailData });
-
-                this.changeView(detailView);
-                detailData.fetch();
-            }
-        });
-
-        return Router;
+    return Router;
 });
