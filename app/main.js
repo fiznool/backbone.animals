@@ -2,39 +2,10 @@ require([
         'jquery',
         'backbone',
         'fastclick',
-        'modules/list',
-        'modules/detail',
+        'router',
         'tappivate'
     ],
-    function($, Backbone, FastClick, List, Detail) {
-
-        var Router = Backbone.Router.extend({
-            routes: {
-                '': 'listView'
-            },
-
-            initialize: function() {
-
-            },
-
-            changeView: function() {
-
-            },
-
-            listView: function() {
-                var listView = new List.View();
-                listView.on('render', function(view) {
-                    $('#main').html(view.el);
-                });
-
-                listView.data.fetch();
-
-            },
-
-            detailView: function(id) {
-
-            }
-        });
+    function($, Backbone, FastClick, Router) {
 
         $(function() {
             // Setup FastClick to prevent 300ms button delay
@@ -44,7 +15,7 @@ require([
             $('#app').tappivate();
 
             // Start the app
-            var router = new Router();
+            var router = new Router({ el: '#main' });
             Backbone.history.start({ pushState: false });
         });
 

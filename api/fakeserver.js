@@ -46,12 +46,12 @@
     };
 
     // Setup Sinon to respond accordingly
-    server.respondWith('GET', /api\/animals(\/(\w+))?/, function(xhr, splatWithSlash, splat) {
+    server.respondWith('GET', /api\/animals(.+)?/, function(xhr, splat) {
         var body = getAnimalsJSON();
         var n, a = [];
         if (splat) {
             // Grab the correct animal
-            body = body[splat];
+            body = body[splat.split('/')[1]];
             if (!body) {
                 xhr.respond(404);
             }

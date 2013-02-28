@@ -1,59 +1,64 @@
 define([
-    'backbone'
-  ],
-  function(Backbone) {
+        'backbone'
+    ],
+    function(Backbone) {
 
-    var List = {};
+        var List = {};
 
-    List.Collection = Backbone.Collection.extend({
-      url: 'api/animals'
-    });
+        List.Model = Backbone.Model.extend({
+            defaults: {
+                id: null,
+                name: ''
+            }
+        });
 
-    List.ItemView = Backbone.View.extend({
-      tagName: 'li',
-      template: _.template('<a href="#!/animals/<%- id %>"><%- name %></a>'),
+        List.Collection = Backbone.Collection.extend({
+            model: List.Model,
+            url: 'api/animals'
+        });
 
-      render: function() {
-        this.$el.html(this.template(this.model.toJSON()));
-        return this;
-      }
+        List.ItemView = Backbone.View.extend({
+            tagName: 'li',
+            template: _.template('<a href="#!/animals/<%- id %>"><%- name %></a>'),
 
-    });
+            render: function() {
+                this.$el.html(this.template(this.model.toJSON()));
+                return this;
+            }
 
-    List.View = Backbone.View.extend({
-      tagName: 'ul',
-      className: 'list',
-      attributes: {
-        'data-tap': 'list'
-      },
+        });
 
-      initialize: function() {
-        this.data = this.collection = this.collection || new List.Collection();
-        //this.updateHeaderbar('Animals');  // TODO add translation
-        this.startListening();
-      },
+        List.View = Backbone.View.extend({
+            tagName: 'ul',
+            className: 'list',
+            attributes: {
+                'data-tap': 'list'
+            },
 
-      startListening: function() {
-        this.listenTo(this.collection, 'reset', this.render);
-      },
+            initialize: function() {
+                this.data = this.collection = this.collection || new List.Collection();
+                //this.updateHeaderbar('Animals');  // TODO add translation
+                this.startListening();
+            },
 
-      render: function() {
-        this.collection.each(this.renderOne, this);
-        this.trigger('render', this);
-        return this;
-      },
+            startListening: function() {
+                this.listenTo(this.collection, 'reset', this.render);
+            },
 
-      renderOne: function(item) {
-        var itemView = new List.ItemView({ model: item });
-        itemView.render();
-        this.$el.append(itemView.el);
-      }
+            render: function() {
+                this.collection.each(this.renderOne, this);
+                this.trigger('render', this);
+                return this;
+            },
 
+            renderOne: function(item) {
+                var itemView = new List.ItemView({ model: item });
+                itemView.render();
+                this.$el.append(itemView.el);
+            }
 
+        });
 
-
-    });
-
-    return List;
+        return List;
 
 });
