@@ -1,10 +1,11 @@
 define([
     'backbone',
     'viewmanager',
-    'modules/headerbar',
-    'modules/list',
-    'modules/detail'
-], function(Backbone, ViewManager, Headerbar, List, Detail) {
+    'data',
+    'views'
+], function(Backbone, ViewManager, Data, Views) {
+
+    var homeTitle = 'Mysterious Animals';
 
     var Router = Backbone.Router.extend({
         routes: {
@@ -15,22 +16,34 @@ define([
 
         initialize: function(options) {
             this.viewManager = new ViewManager(options.main);
-            this.headerbar = new Headerbar.View({ el: options.header });
+            this.headerbar = new Views.Headerbar({
+                el: options.header,
+                model: new Data.Headerbar.Model({ title: homeTitle })
+            }).render();
+
+            this.animals = new Data.Animals.Collection();
         },
 
-        _changeView: function(newView) {
-            var self = this;
-            this.viewManager.changeView(newView, function() {
-                self.headerbar.model.set({ title: newView.title() });
-            });
+        fetchAnimals: function(options) {
+            this.animals.fetch(options);
         },
 
         listView: function() {
-            this._changeView(new List.View());
+            this.headerbar.model.set('title', homeTitle);
+
+            this.viewManager.changeView(new Views.List({ collection: this.animals }));
+            this.fetchAnimals();
         },
 
         detailView: function(id) {
-            this._changeView(new Detail.View({ id: id }));
+            var animal = this.animals.get(id);
+            if(animal) {
+                this.headerbar.model.set('title', animal.get('name'));
+                this.viewManager.changeView(new Views.Detail({ model: animal }));
+            } else {
+                this.navigate('', { trigger: true });
+            }
+
         }
     });
 

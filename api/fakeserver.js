@@ -61,7 +61,9 @@
                 if (body.hasOwnProperty(n)) {
                     a.push({
                         'id': n,
-                        'name': body[n].name
+                        'name': body[n].name,
+                        'description': body[n].description,
+                        'img': body[n].img
                     });
                 }
             }

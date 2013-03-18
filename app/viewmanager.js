@@ -14,16 +14,12 @@ define([
 
     ViewManager.prototype.changeView = function(newView, onRender) {
         this.currentView.stopListening();
-        this.currentView.off('render');
 
         this.currentView = newView;
 
-        this.currentView.on('render', function(view) {
-            this.$el.html(view.el);
-            onRender();
-        }, this);
+        this.currentView.render();
+        this.$el.html(this.currentView.el);
 
-        this.currentView.data.fetch();
     };
 
     return ViewManager;
