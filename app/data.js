@@ -3,7 +3,8 @@ define([
 ],
 
 function(Backbone) {
-    var urlRoot = 'api/';
+    //var urlRoot = 'api/';
+    var urlRoot = 'http://localhost:2403/';
     var imgRoot = 'api/images/';
 
     var Data = {
