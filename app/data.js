@@ -1,8 +1,13 @@
 define([
-    'backbone'
+    'backbone',
+    'backbone.basicauth;'
 ],
 
 function(Backbone) {
+    var urlRoot = 'api/';
+
+    Backbone.BasicAuth.set('animals', 'animals');
+
     var Data = {
         Headerbar: {},
         Animals: {}
@@ -24,7 +29,7 @@ function(Backbone) {
 
     Data.Animals.Collection = Backbone.Collection.extend({
         model: Data.Animals.Model,
-        url: 'api/animals'
+        url: urlRoot + 'animals'
     });
 
     return Data;
