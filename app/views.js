@@ -57,7 +57,7 @@ function(Backbone) {
 
     Views.Detail = BaseView.extend({
         className: 'detail',
-        template: _.template('<img src="<%- img %>" height="177px"><p><%- description %></p>')
+        template: _.template('<div class="img-wrapper"><img src="<%- img %>"></div><p><%- description %></p>')
     });
 
     return Views;

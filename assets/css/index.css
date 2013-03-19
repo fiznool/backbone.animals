@@ -160,3 +160,13 @@ input[type="search"] {
 .detail {
     margin: 10px;
 }
+
+.detail .img-wrapper {
+    text-align: center;
+}
+
+.detail img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
