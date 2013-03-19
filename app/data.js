@@ -1,12 +1,9 @@
 define([
-    'backbone',
-    'backbone.basicauth;'
+    'backbone'
 ],
 
 function(Backbone) {
     var urlRoot = 'api/';
-
-    Backbone.BasicAuth.set('animals', 'animals');
 
     var Data = {
         Headerbar: {},
