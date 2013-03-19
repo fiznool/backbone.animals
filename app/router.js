@@ -5,7 +5,7 @@ define([
     'views'
 ], function(Backbone, ViewManager, Data, Views) {
 
-    var homeTitle = 'Mysterious Animals';
+    var homeTitle = 'Did You Know?';
 
     var Router = Backbone.Router.extend({
         routes: {
