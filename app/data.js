@@ -5,9 +5,11 @@ define([
 
 function(Backbone) {
     //var urlRoot = 'api/';
+    var imgRoot = 'api/images/';
     var urlRoot = 'https://baas.kinvey.com/appdata/kid_VTfo6Ts8j5/';
+    //var imgRoot = 'https://baas.kinvey.com/blob/kid_VTfo6Ts8j5/upload-loc/';
 
-    Backbone.BasicAuth.set('animals', 'animals');
+    Backbone.BasicAuth.set('steve.irwin', 'crochunter');
 
     var Data = {
         Headerbar: {},
@@ -28,6 +30,7 @@ function(Backbone) {
         },
         parse: function(resp) {
             resp.id = resp._id;
+            resp.img = imgRoot + resp.img;
             return resp;
         }
     });
