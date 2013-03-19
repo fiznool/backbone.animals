@@ -15,22 +15,22 @@
             "lion": {
                 "name": "Lion",
                 "description": "A lion can run up to 65 km/h at full speed.",
-                "img":"api/images/lion.jpg"
+                "img":"lion.jpg"
             },
             "hippo": {
                 "name": "Hippopotamus",
                 "description": "Hippos excrete a pink oily like substance which helps to act as a sunscreen during the day.",
-                "img": "api/images/hippo.jpg"
+                "img": "hippo.jpg"
             },
             "elephant": {
                 "name": "Elephant",
                 "description": "Elephants can smell water from 5km away!",
-                "img": "api/images/elephant.jpg"
+                "img": "elephant.jpg"
             },
             "crocodile": {
                 "name": "Crocodile",
                 "description": "Crocodiles can live to 100 years old.",
-                "img":"api/images/crocodile.jpg"
+                "img":"crocodile.jpg"
             },
             "komodo_dragon": {
                 "name": "Komodo Dragon",

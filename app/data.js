@@ -3,6 +3,9 @@ define([
 ],
 
 function(Backbone) {
+    var urlRoot = 'api/';
+    var imgRoot = 'api/images/';
+
     var Data = {
         Headerbar: {},
         Animals: {}
@@ -19,12 +22,17 @@ function(Backbone) {
             name: '',
             description: '',
             img: ''
+        },
+
+        parse: function(resp) {
+            resp.img = imgRoot + resp.img;
+            return resp;
         }
     });
 
     Data.Animals.Collection = Backbone.Collection.extend({
         model: Data.Animals.Model,
-        url: 'api/animals'
+        url: urlRoot + 'animals'
     });
 
     return Data;
