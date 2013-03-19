@@ -28,6 +28,7 @@ function(Backbone) {
             description: '',
             img: ''
         },
+
         parse: function(resp) {
             resp.id = resp._id;
             resp.img = imgRoot + resp.img;
