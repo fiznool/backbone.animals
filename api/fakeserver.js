@@ -35,12 +35,12 @@
             "komodo_dragon": {
                 "name": "Komodo Dragon",
                 "description": "The carniverous Komodo Dragon can smell blood from over 3km away!",
-                "img":"api/images/komodo_dragon.jpg"
+                "img":"komodo_dragon.jpg"
             },
             "honey_badger": {
                 "name": "Honey Badger",
                 "description": "Honey badgers have been known to take on venom-spitting cobras - and win.",
-                "img": "api/images/honey_badger.jpg"
+                "img": "honey_badger.jpg"
             }
         };
     };
