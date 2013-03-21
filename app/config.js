@@ -15,7 +15,7 @@ require.config({
             "exports": "_"
         },
         "backbone": {
-            "deps": [ "underscore" ],
+            "deps": [ "underscore", "jquery" ],
             "exports": "Backbone"
         },
         "tappivate": {
